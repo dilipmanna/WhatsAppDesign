@@ -1,5 +1,6 @@
 package com.example.whatsapp.activities
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,7 +27,12 @@ class AgreeContinueActivity : AppCompatActivity() {
             Pair("Privacy Policy", View.OnClickListener {
                 Toast.makeText(applicationContext, "Privacy Policy Clicked", Toast.LENGTH_SHORT).show()
             }))
-        tv_privacy_policy.setHighlightColor(Color.TRANSPARENT);
+        tv_privacy_policy.setHighlightColor(Color.TRANSPARENT)
+
+        btn_agree_and_continue.setOnClickListener {
+            val intent = Intent(this,DashboardActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {

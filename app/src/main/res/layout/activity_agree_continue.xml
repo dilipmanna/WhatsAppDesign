@@ -40,6 +40,7 @@
         android:text="Read our Privacy Policy. Tap 'Agree and continue' to accept  this Terms of Service."/>
 
     <Button
+        android:id="@+id/btn_agree_and_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="AGREE AND CONTINUE"
