@@ -1,15 +1,28 @@
 package com.example.whatsapp.fragments
 
 
+import android.animation.LayoutTransition
+import android.app.SearchManager
+import android.content.Context
+import android.content.Intent
+import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-
 import com.example.whatsapp.R
+import com.example.whatsapp.activities.SettingActivity
 import com.example.whatsapp.adapters.ChatsAdapter
+import kotlinx.android.synthetic.main.activity_dashboard.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -45,6 +58,62 @@ class ChatsFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
        //super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.chat_option_menu,menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = searchItem.actionView as SearchView
+
+        val searchBar = searchView.findViewById<View>(R.id.search_bar) as LinearLayout
+        //searchBar.layoutTransition = LayoutTransition()
+
+        if (searchBar != null && searchBar is LinearLayout) {
+            searchBar.layoutTransition = LayoutTransition()
+        }
+
+        //searchView.queryHint = "Search..."
+        //val editext  = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        //editext.setTextColor(Color.BLACK)
+        //editext.setHintTextColor(Color.GRAY)
+        //val searchClose = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
+        //searchClose.setColorFilter(Color.argb(255, 0, 0, 0))
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+               // (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+                menu.forEach { menuitem->
+                    if (menuitem !== item) menuitem.setVisible(false)
+                }
+
+                activity?.getWindow()?.setStatusBarColor(resources.getColor(R.color.colorBlack,activity?.theme))
+
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                activity?.getWindow()?.setStatusBarColor(resources.getColor(R.color.colorPrimaryDark,activity?.theme))
+              // (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary,context?.theme)))
+                activity?.invalidateOptionsMenu()
+                return true
+            }
+
+        })
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                searchView.setQuery("",false)
+                //searchItem.collapseActionView()
+                Toast.makeText(context,"Submit Looking for $query",Toast.LENGTH_SHORT).show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Toast.makeText(context,"Looking for $newText",Toast.LENGTH_SHORT).show()
+                return true
+            }
+
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -71,6 +140,9 @@ class ChatsFragment : Fragment() {
             }
             R.id.action_settings ->{
                 Log.i(TAG,"Setting")
+                val settingIntent = Intent(context,SettingActivity::class.java)
+                startActivity(settingIntent)
+                activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
                 true
             }
             else -> super.onOptionsItemSelected(item)

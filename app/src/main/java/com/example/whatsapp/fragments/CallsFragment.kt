@@ -1,12 +1,14 @@
 package com.example.whatsapp.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 
 import com.example.whatsapp.R
+import com.example.whatsapp.activities.SettingActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -41,6 +43,9 @@ class CallsFragment : Fragment() {
             }
             R.id.action_settings ->{
                 Log.i(TAG,"setting menu click")
+                val settingIntent = Intent(context, SettingActivity::class.java)
+                startActivity(settingIntent)
+                activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -22,12 +22,10 @@
             android:layout_toStartOf="@id/tv_time"
             android:text="Donald Trump"
             android:textColor="@color/colorBlack"
-            android:textStyle="bold"
             android:textSize="@dimen/_15sdp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_toEndOf="@+id/iv_userImg"
             android:layout_toStartOf="@id/tv_time"
@@ -44,8 +42,6 @@
             android:text="11:48 am"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="@dimen/_10sdp"
-            />
-
+            android:layout_marginEnd="@dimen/_10sdp"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
