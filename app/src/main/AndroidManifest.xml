@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoBar">
-        <activity android:name=".activities.ChatsSettingActivity"
+        <activity android:name=".activities.NotificationsSettingActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".activities.AccountActivity"
+            android:name=".activities.ChatsSettingActivity"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".activities.AccountActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.SettingActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activities.DashboardActivity"
-            />
+        <activity android:name=".activities.DashboardActivity" />
         <activity
             android:name=".activities.AgreeContinueActivity"
             android:theme="@style/AppThemeDarkWhite">

@@ -24,6 +24,11 @@ class SettingActivity : AppCompatActivity() {
             startActivity(settingIntent)
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         }
+        btn_notification_setting.setOnClickListener {
+            val settingIntent = Intent(this,NotificationsSettingActivity::class.java)
+            startActivity(settingIntent)
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
+        }
 
     }
 
